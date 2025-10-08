@@ -1,0 +1,4 @@
+[
+  { "id": "shoprite-longacres", "name": "Shoprite Longacres", "distanceKm": 4.1, "baseEta": 35, "deliveryFee": 20, "rating": 4.3 },
+  { "id": "picknpay-woodlands", "name": "Pick n Pay Woodlands", "distanceKm": 6.0, "baseEta": 45, "deliveryFee": 25, "rating": 4.6 }
+]

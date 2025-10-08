@@ -1,0 +1,10 @@
+{
+  "Staples": [
+    { "name": "Roller Meal 25kg", "price": 280, "image": "maize meal,bag,grain" },
+    { "name": "Dry Beans 5kg", "price": 120, "image": "beans,legumes" }
+  ],
+  "Fresh Produce": [
+    { "name": "Tomatoes 1kg", "price": 25, "image": "tomatoes,market" },
+    { "name": "Onions 1kg", "price": 20, "image": "onions,vegetables" }
+  ]
+}
