@@ -1,0 +1,269 @@
+/* =====================
+   The Marketplace v3.5
+   Clean & Calm (light)
+   Fruits + Essentials added, Produce = veg only
+   ===================== */
+:root{
+  /* Brand palette */
+  --primary:#16a34a;
+  --primary-600:#0ea55a;
+  --accent:#0ea5e9;
+  --danger:#ef4444;
+
+  /* Light UI */
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --card:#ffffff;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --muted:#64748b;
+
+  --shadow:0 8px 24px rgba(2,6,23,.08);
+  --radius:16px;
+
+  --bar-height:56px;                    /* floating nav height */
+  --safe-bottom: max( env(safe-area-inset-bottom), 10px );
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--text); background:var(--bg);
+  font:14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+  display:flex;flex-direction:column;
+  padding-bottom: calc(var(--bar-height) + var(--safe-bottom) + 18px); /* keep content above nav */
+  overflow-x:hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+a{color:inherit;text-decoration:none}
+
+/* Layout helpers */
+.container{padding:16px}
+.grid{display:grid;gap:12px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.row{display:flex;align-items:center}
+.row-between{display:flex;align-items:center;justify-content:space-between}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  content-visibility:auto; contain-intrinsic-size: 220px;
+}
+.card:hover{transform:translateY(-1px); box-shadow:0 12px 32px rgba(2,6,23,.10); border-color:#d7dee8}
+.card-content{padding:12px}
+.img,.cat-img{border-radius:12px;object-fit:cover;background:#eef2f7;border:1px solid var(--border)}
+.img{width:96px;height:96px}
+.cat-img{width:100%;height:86px}
+
+.btn{
+  border:0; cursor:pointer; font-weight:800; color:#fff; padding:9px 12px; border-radius:12px;
+  background:linear-gradient(180deg,var(--primary-600),var(--primary));
+  box-shadow:0 10px 24px rgba(22,163,74,.22);
+  transition:filter .15s ease, transform .05s ease;
+  touch-action:manipulation;
+}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:translateY(1px)}
+.btn.secondary{color:var(--text); background:var(--panel); border:1px solid var(--border); box-shadow:0 6px 18px rgba(2,6,23,.05)}
+.btn.info{background:linear-gradient(180deg,#38bdf8,var(--accent)); box-shadow:0 10px 22px rgba(14,165,233,.2)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.icon-btn{padding:8px 10px;border-radius:12px;background:var(--panel);border:1px solid var(--border);color:var(--text)}
+.icon-btn:active{transform:translateY(1px)}
+
+.input{
+  width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--border);
+  background:#ffffff;color:var(--text);outline:none; font-size:16px;
+  box-shadow:0 2px 8px rgba(2,6,23,.06);
+  -webkit-text-size-adjust:100%;
+}
+.input:focus{border-color:#93c5fd; box-shadow:0 0 0 4px rgba(59,130,246,.20)}
+input[type="range"]{accent-color:var(--primary)}
+
+.subtitle{font-size:12px;color:var(--muted)}
+.pill{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);background:#f1f5f9;display:inline-block;color:#0f172a}
+.badge{font-size:10px;padding:2px 6px;border-radius:999px;border:1px solid var(--border);background:#f1f5f9;color:#0f172a}
+.badge.blue{background:#e0f2fe;color:#075985;border-color:#bae6fd}
+.badge.gray{background:#f1f5f9;color:#334155}
+.badge.red{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+.price{font-weight:900}
+.w-100{width:100%}
+.hidden{display:none}
+.center{text-align:center}
+.section-title{font-family:Poppins,Inter,system-ui,sans-serif;font-size:16px;font-weight:800;color:#0b1324;letter-spacing:.02em}
+.divider{height:12px; background:linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-top:1px solid var(--border); border-bottom:1px solid #f1f5f9}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ---------- Sticky header + search + categories NEVER leave screen ---------- */
+header.app{
+  position:sticky; top:0; z-index:40;      /* above everything */
+  background:rgba(255,255,255,.94);
+  backdrop-filter: blur(10px) saturate(140%);
+  border-bottom:1px solid var(--border);
+}
+.headerWrap{padding:10px 12px 10px}
+.brandRow{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.brandStack{display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto}
+.brandTitle{
+  color:#0b1324;
+  font-family:Poppins,Inter,sans-serif;
+  font-weight:900; letter-spacing:.04em; text-transform:uppercase;
+  font-size: clamp(18px, 6vw, 26px);
+  line-height:1.05;
+}
+.brandLink{display:inline-flex; align-items:center; justify-content:center; text-decoration:none}
+.brandSub{ margin-top:2px; font-family:Poppins,Inter,sans-serif; font-weight:700; letter-spacing:.20em; color:#16a34a; font-size:11px }
+
+/* Search row + typeahead */
+.searchRow{padding:8px 2px; position:relative}
+.searchBar{
+  display:flex; gap:10px; align-items:center;
+  border:1px solid var(--border);
+  border-radius:9999px;
+  padding:10px 12px;
+  background:#ffffff;
+  box-shadow: 0 6px 16px rgba(2,6,23,.06), inset 0 1px 0 rgba(255,255,255,.7);
+}
+.searchBar input{flex:1; background:transparent; border:0; outline:0; color:var(--text); font-size:16px}
+.typeahead{
+  position:absolute; left:12px; right:12px; top:calc(100% + 6px);
+  background:#fff; border:1px solid var(--border); border-radius:12px; box-shadow:0 12px 32px rgba(2,6,23,.10);
+  overflow:hidden; z-index:45;
+}
+.typeahead button{
+  width:100%; text-align:left; background:#fff; border:0; padding:10px 12px; cursor:pointer; display:flex; gap:8px; align-items:center;
+}
+.typeahead button:hover{background:#f8fafc}
+
+/* Sticky categories scroller */
+.catsBarWrap{
+  position:sticky; top:64px; z-index:39;     /* just under header */
+  background:#ffffff;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.catsBar{
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:10px 12px;
+  scrollbar-width:none;
+}
+.catsBar::-webkit-scrollbar{display:none}
+.catChip{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; cursor:pointer;
+  background:#ffffff; border:1px solid var(--border); color:#0f172a; font-weight:700; font-size:12px; white-space:nowrap;
+}
+.catChip.active{border-color:#a7f3d0; background:#ecfdf5; color:#065f46}
+.catIcon{display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px}
+
+/* Slide-down menu panel (auto closes on select) */
+.navPanel{
+  position:absolute; left:0; right:0; top:100%;
+  background:#ffffff;
+  border-bottom:1px solid var(--border);
+  box-shadow:0 24px 50px rgba(2,6,23,.10);
+  display:none; z-index:45;
+}
+.navPanel.show{display:block; animation:menuDrop .18s ease both}
+@keyframes menuDrop{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)}}
+.navPanelInner{padding:12px}
+.menuSection{margin-top:6px}
+.menuTitle{font:700 12px/1 Inter,system-ui; color:#334155; margin:6px 2px}
+.menuGrid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.menuItem{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  border:1px solid var(--border); background:#ffffff;
+  padding:10px 8px; border-radius:14px; color:#0f172a; font-weight:700; font-size:12px;
+}
+.menuItem:active{transform:translateY(1px)}
+.miIcon{font-size:18px; line-height:1}
+.menuCats{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.menuCats .catChip{padding:7px 10px}
+
+/* Main mount */
+main#app{padding:12px 0}
+
+/* Floating bottom nav — glass, subtle auto-dim to reduce distraction */
+nav.bottom{
+  position:fixed; left:50%; transform:translateX(-50%);
+  bottom:10px; z-index:35;
+  width:min(640px, 94vw);
+  display:flex; justify-content:space-evenly; align-items:center;
+  padding:6px 8px;
+  background:rgba(255,255,255,0.82);
+  border:1px solid var(--border);
+  border-radius:9999px;
+  box-shadow:0 10px 28px rgba(2,6,23,.10);
+  backdrop-filter: blur(10px) saturate(140%);
+  transition: opacity .18s ease, transform .18s ease;
+}
+nav.bottom.dim{opacity:.65}
+.nav-btn{
+  background:none;border:0;color:#0f172a;cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:2px; padding:6px 8px; border-radius:12px;
+  font-size:11px;
+}
+.nav-btn.active{color:#065f46; background:#ecfdf5; border:1px solid #a7f3d0}
+.nav-btn span{font-size:10px; font-weight:700}
+
+/* Cart bubble (indicator changed to green + pulse) */
+.cart-bubble{
+  position:absolute;right:-6px;top:-6px;background:#16a34a;color:#fff;border-radius:999px;
+  font-size:10px;padding:2px 6px;box-shadow:0 12px 24px rgba(22,163,74,.35);
+  animation:pulse .9s ease-out 1;
+}
+@keyframes pulse{
+  0%{transform:scale(.8); opacity:.6}
+  60%{transform:scale(1.15); opacity:1}
+  100%{transform:scale(1); opacity:1}
+}
+
+/* Footer (non-sticky; we add bottom spacer so it’s fully visible over nav) */
+footer.appFooter{
+  padding:16px; margin-top:16px;
+  color:#334155; font-size:12px;
+}
+.footerCard{border:1px solid var(--border); border-radius:14px; background:#fff; padding:12px; box-shadow:var(--shadow)}
+
+/* Floating “Checkout / Place order” dock (sits ABOVE the nav) */
+.dock{
+  position:fixed; left:50%; transform:translateX(-50%);
+  bottom: calc(var(--bar-height) + var(--safe-bottom) + 10px);
+  z-index:38; /* above nav, below header */
+  width:min(640px, 94vw);
+}
+.dock .dockCard{
+  background:rgba(255,255,255,.92);
+  backdrop-filter: blur(10px) saturate(140%);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 10px 28px rgba(2,6,23,.10);
+  padding:10px 12px;
+}
+
+/* Quick View modal for Search */
+.modal{
+  position:fixed; inset:0; display:none; z-index:60; align-items:center; justify-content:center;
+}
+.modal.show{display:flex}
+.modal::before{
+  content:""; position:absolute; inset:0; background:rgba(15,23,42,.35); backdrop-filter: blur(2px);
+}
+.modalCard{
+  position:relative; z-index:1; width:min(520px,92vw);
+  background:rgba(255,255,255,.98); border:1px solid var(--border); border-radius:16px; box-shadow:0 20px 50px rgba(2,6,23,.25);
+  padding:14px;
+}
+.modalClose{
+  position:absolute; right:10px; top:10px; border:0; background:transparent; font-size:20px; cursor:pointer;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *{animation:none !important; transition:none !important;}
+}
+
+/* Tiny screens tweak for bottom bar */
+@media (max-width:400px){
+  nav.bottom{padding:5px 6px}
+  .nav-btn svg{width:20px;height:20px}
+}

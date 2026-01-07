@@ -2,64 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>The Marketplace — Dark Glass v3.2 (Mobile Header)</title>
-<meta name="theme-color" content="#0b1120"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>The Marketplace — Clean Calm v3.5</title>
+<meta name="theme-color" content="#0ea55a"/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
-
-<!-- External CSS -->
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- HEADER -->
   <header class="app" id="appHeader">
     <div class="headerWrap">
       <div class="brandRow">
-        <!-- Left: navigation (hamburger) -->
-        <button class="icon-btn" data-action="toggle-nav" aria-label="Open menu">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#93c5fd" fill="none" stroke-width="2" aria-hidden="true">
+        <button class="icon-btn" data-action="toggle-nav" aria-label="Open menu" title="Menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
 
-        <!-- Center: Brand -->
-        <div class="brandStack" aria-label="Brand">
-          <div class="brandTitle" role="heading" aria-level="1">THE MARKETPLACE</div>
-          <div class="brandSub">LUSAKA</div>
-        </div>
+        <a class="brandLink" href="#home" data-action="goto" data-route="home" aria-label="Go to Home">
+          <div class="brandStack">
+            <div class="brandTitle" role="heading" aria-level="1">THE MARKETPLACE</div>
+            <div class="brandSub">LUSAKA</div>
+          </div>
+        </a>
 
-        <!-- Right: Cart + Profile -->
         <div class="headerActions">
           <button class="icon-btn" data-action="goto" data-route="cart" aria-label="Open cart" style="position:relative">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="#93c5fd" fill="none" stroke-width="2" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
               <path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="21" r="1.5"/><circle cx="18" cy="21" r="1.5"/>
             </svg>
             <span id="cartBubble" class="cart-bubble hidden" aria-hidden="true">0</span>
           </button>
-          <button class="icon-btn" data-action="goto" data-route="admin" aria-label="Profile">
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="#93c5fd" fill="none" stroke-width="2" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-            </svg>
-          </button>
         </div>
       </div>
 
-      <!-- Big search bar -->
       <div class="searchRow">
         <div class="searchBar">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#93c5fd" fill="none" stroke-width="2" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
             <path d="M21 21l-4.35-4.35"/><circle cx="10" cy="10" r="7"/>
           </svg>
-          <input id="globalSearchInputHeader" type="text" placeholder="Search products across all categories…" autocomplete="off"/>
-          <button class="btn" id="globalSearchGoHeader" aria-label="Search now">Search</button>
+          <input id="globalSearchInputHeader" type="search" inputmode="search" placeholder="Search products across all categories…" autocomplete="off"/>
+          <button class="btn info" id="globalSearchGoHeader" aria-label="Search now">Search</button>
         </div>
+        <div id="typeahead" class="typeahead hidden" role="listbox" aria-label="Suggestions"></div>
       </div>
     </div>
 
-    <!-- Slide-down Menu Panel -->
     <div id="navPanel" class="navPanel" role="dialog" aria-label="Main menu" aria-hidden="true">
       <div class="navPanelInner">
         <div class="menuSection">
@@ -70,9 +60,6 @@
             </button>
             <button class="menuItem" data-action="goto" data-route="cart">
               <span class="miIcon">🛒</span><span>Cart</span>
-            </button>
-            <button class="menuItem" data-action="goto" data-route="admin">
-              <span class="miIcon">👤</span><span>Profile</span>
             </button>
             <button class="menuItem" data-action="goto" data-route="search">
               <span class="miIcon">🔎</span><span>Search</span>
@@ -87,25 +74,30 @@
       </div>
     </div>
 
-    <!-- Sticky categories scroller -->
     <div class="catsBarWrap">
       <div id="catsBar" class="catsBar" role="tablist" aria-label="Categories">
-        <!-- Filled by JS -->
-      </div>
+        </div>
     </div>
 
-    <!-- Strong divider under header block -->
     <div class="divider" aria-hidden="true"></div>
   </header>
 
-  <!-- Live region for a11y -->
   <div id="a11yLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- APP MOUNT -->
   <main id="app"></main>
 
-  <!-- Floating pill bottom nav -->
-  <nav class="bottom" role="navigation" aria-label="Primary">
+  <footer class="appFooter">
+    <div class="footerCard">
+      <strong style="font-family:Poppins">Tips</strong>
+      <ul style="margin:8px 0 0 18px;color:#475569">
+        <li>Use “Compare” to weigh price, distance, ETA and delivery fee.</li>
+        <li>Heavy items? Choose a closer store for easier delivery.</li>
+        <li>Mobile money accepted: MTN, Airtel, Zamtel.</li>
+      </ul>
+    </div>
+  </footer>
+
+  <nav class="bottom dim" role="navigation" aria-label="Primary" id="bottomNav">
     <button class="nav-btn" data-action="goto" data-route="home" id="navHome" aria-label="Home">
       <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
       <span>Home</span>
@@ -114,17 +106,15 @@
       <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"><path d="M21 21l-4.35-4.35"/><circle cx="10" cy="10" r="7"/></svg>
       <span>Search</span>
     </button>
-    <button class="nav-btn" data-action="goto" data-route="cart" id="navCart" aria-label="Cart" style="position:relative">
-      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="21" r="1.5"/><circle cx="18" cy="21" r="1.5"/></svg>
-      <span>Cart</span>
-    </button>
-    <button class="nav-btn" data-action="goto" data-route="admin" id="navAdmin" aria-label="Profile">
-      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>Profile</span>
-    </button>
   </nav>
 
-  <!-- External JS -->
-  <script src="js/script.js"></script>
+  <div id="modal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modalCard">
+      <button class="modalClose" data-action="close-modal" aria-label="Close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
